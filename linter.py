@@ -30,7 +30,7 @@ class Coffeelint(Linter):
     def cmd(self):
         """Return a tuple with the command line to execute."""
 
-        result = ['coffeelint', '--jslint', '--stdin']
+        result = [self.executable_path, '--jslint', '--stdin']
 
         if persist.get_syntax(self.view) == 'coffeescript_literate':
             result.append('--literate')
