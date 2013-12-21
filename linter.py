@@ -35,4 +35,6 @@ class Coffeelint(Linter):
         if persist.get_syntax(self.view) == 'coffeescript_literate':
             result.append('--literate')
 
+        result += self.settings()['args']
+
         return result
