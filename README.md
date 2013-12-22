@@ -16,7 +16,7 @@ Before installing this plugin, you must ensure that `coffeelint` is installed on
    npm install -g coffeelint
    ```
 
-1. If you are using `nvm` and `zsh`, ensure that the line to load `nvm` is in `.zprofile` and not `.zshrc`.
+1. If you are using `nvm` and `zsh`, ensure that the line to load `nvm` is in `.zshenv` and not `.zshrc`.
 
 Once coffeelint is installed, you can proceed to install the SublimeLinter-coffeelint plugin if it is not yet installed.
 
