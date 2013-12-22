@@ -26,7 +26,6 @@ class Coffeelint(Linter):
         r'\s*reason="\[(?:(?P<error>error)|(?P<warning>warn))\] (?P<message>.+?)"\s*\r?\n'
     )
     multiline = True
-    error_stream = util.STREAM_BOTH
     comment_re = r'\s*#'
 
     def cmd(self):
