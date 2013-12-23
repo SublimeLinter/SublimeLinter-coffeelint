@@ -10,7 +10,8 @@
 
 """This module exports the Coffeelint plugin class."""
 
-from SublimeLinter.lint import Linter, persist
+import os
+from SublimeLinter.lint import Linter, persist, util
 
 
 class Coffeelint(Linter):
@@ -30,11 +31,18 @@ class Coffeelint(Linter):
     def cmd(self):
         """Return a tuple with the command line to execute."""
 
-        result = [self.executable_path, '--jslint', '--stdin']
+        command = [self.executable_path, '--jslint', '--stdin']
 
         if persist.get_syntax(self.view) == 'coffeescript_literate':
-            result.append('--literate')
+            command.append('--literate')
 
-        result += self.settings()['args']
+        config = util.find_file(os.path.dirname(self.filename), 'coffeelint.json')
 
-        return result
+        if config:
+            command += ['-f', config]
+
+        settings = self.settings()
+        if 'args' in settings:
+            command += settings['args']
+
+        return command

@@ -1,0 +1,10 @@
+SublimeLinter-coffeelint 1.0.3
+-------------------------------
+The linter plugin will search for coffeelint.json in the
+edited file's directory and continue until it reaches the
+root directory. If it finds a coffeelint.json,
+'-f /path/to/coffeelint.json' is passed to coffeelint.
+
+Unfortunately there is no sane way to support a
+coffeelintConfig object within a package.json file,
+the way coffeelint itself does.
