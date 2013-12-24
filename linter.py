@@ -38,9 +38,12 @@ class Coffeelint(Linter):
 
         config = util.find_file(os.path.dirname(self.filename), 'coffeelint.json')
 
-        args = self.build_args(self.get_view_settings())
+        if config:
+            # Allow the user to specify a config in args
 
-        if config and not '-f' in args:
-            command += ['-f', config]
+            args = self.get_view_settings(no_inline=True).get('args', [])
+
+            if not '-f' in args
+                command += ['-f', config]
 
         return command
