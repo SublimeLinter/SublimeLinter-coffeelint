@@ -31,14 +31,17 @@ class Coffeelint(Linter):
     def cmd(self):
         """Return a tuple with the command line to execute."""
 
-        command = [self.executable_path, '--jslint', '--stdin']
+        command = [self.executable_path, '--jslint', '--stdin', '*']
 
         if persist.get_syntax(self.view) == 'coffeescript_literate':
             command.append('--literate')
 
-        config = util.find_file(os.path.dirname(self.filename), 'coffeelint.json')
+        args = self.get_view_settings(no_inline=True).get('args', [])
 
-        if config:
-            command += ['-f', config]
+        if not '-f' in args:
+            config = util.find_file(os.path.dirname(self.filename), 'coffeelint.json')
+
+            if config:
+                command += ['-f', config]
 
         return command
