@@ -36,14 +36,12 @@ class Coffeelint(Linter):
         if persist.get_syntax(self.view) == 'coffeescript_literate':
             command.append('--literate')
 
-        config = util.find_file(os.path.dirname(self.filename), 'coffeelint.json')
+        args = self.get_view_settings(no_inline=True).get('args', [])
 
-        if config:
-            # Allow the user to specify a config in args
+        if not '-f' in args:
+            config = util.find_file(os.path.dirname(self.filename), 'coffeelint.json')
 
-            args = self.get_view_settings(no_inline=True).get('args', [])
-
-            if not '-f' in args
+            if config:
                 command += ['-f', config]
 
         return command
