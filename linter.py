@@ -43,6 +43,4 @@ class Coffeelint(Linter):
         if config and not '-f' in args:
             command += ['-f', config]
 
-        command.append('*')
-
         return command
