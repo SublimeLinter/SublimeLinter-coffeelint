@@ -27,6 +27,7 @@ class Coffeelint(Linter):
     )
     multiline = True
     comment_re = r'\s*#'
+    config_file = ('-f', 'coffeelint.json')
 
     def cmd(self):
         """Return a tuple with the command line to execute."""
@@ -35,10 +36,5 @@ class Coffeelint(Linter):
 
         if persist.get_syntax(self.view) == 'coffeescript_literate':
             command.append('--literate')
-
-        config = util.find_file(os.path.dirname(self.filename), 'coffeelint.json')
-
-        if config:
-            command += ['-f', config]
 
         return command
