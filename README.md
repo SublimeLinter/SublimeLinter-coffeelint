@@ -35,6 +35,8 @@ To install via Package Control, do the following:
 ## Settings
 For general information on how SublimeLinter works with settings, please see [Settings](http://sublimelinter.readthedocs.org/en/latest/settings.html). For information on generic linter settings, please see [Linter Settings](http://sublimelinter.readthedocs.org/en/latest/linter_settings.html).
 
+You may configure `coffeelint`’s behavior using `coffeelint.json` configuration files, exactly as is described in the [coffeelint documentation](http://www.coffeelint.org/#usage).
+
 ## Contributing
 If you would like to contribute enhancements or fixes, please do the following:
 

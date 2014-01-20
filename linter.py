@@ -26,7 +26,7 @@ class Coffeelint(Linter):
     )
     multiline = True
     comment_re = r'\s*#'
-    config_file = ('-f', 'coffeelint.json')
+    config_file = ('-f', 'coffeelint.json', '~')
 
     def cmd(self):
         """Return a tuple with the command line to execute."""
