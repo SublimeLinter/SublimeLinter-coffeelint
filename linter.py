@@ -25,7 +25,7 @@ class Coffeelint(Linter):
     regex = (
         r'^<issue line="(?P<line>\d+)"\s*\r?\n'
         r'\s*lineEnd="\d+"\s*\r?\n'
-        r'\s*reason="\[(?:(?P<error>error)|(?P<warning>warn))\] (?P<message>.+?)"\s*\r?\n'
+        r'\s*reason="\[(?:(?P<error>error)|(?P<warning>warn))\](?: \[stdin\]:\d+:(?P<col>\d+): error:)? (?P<message>.+?)\r?\n'
     )
     multiline = True
     comment_re = r'\s*#'
