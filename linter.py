@@ -10,13 +10,13 @@
 
 """This module exports the Coffeelint plugin class."""
 
-from SublimeLinter.lint import Linter, persist
+from SublimeLinter.lint import NodeLinter, persist
 
 
-class Coffeelint(Linter):
-
+class Coffeelint(NodeLinter):
     """Provides an interface to coffeelint."""
 
+    npm_name = 'coffeelint'
     syntax = ('coffeescript', 'coffeescript_literate')
     executable = 'coffeelint'
     version_args = '--version'
@@ -36,7 +36,15 @@ class Coffeelint(Linter):
     def cmd(self):
         """Return a tuple with the command line to execute."""
 
-        command = [self.executable_path, '--reporter', 'jslint', '--stdin']
+        path = self.executable_path
+
+        if not path:
+            result = self.context_sensitive_executable_path([self.executable])
+
+            if result[1]:
+                path = result[1]
+
+        command = [path, '--reporter', 'jslint', '--stdin']
 
         if persist.get_syntax(self.view) == 'coffeescript_literate':
             command.append('--literate')
