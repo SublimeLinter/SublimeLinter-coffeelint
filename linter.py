@@ -14,7 +14,6 @@ from SublimeLinter.lint import NodeLinter, persist
 
 
 class Coffeelint(NodeLinter):
-
     """Provides an interface to coffeelint."""
 
     npm_name = 'coffeelint'
