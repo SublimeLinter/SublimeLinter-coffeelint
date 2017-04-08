@@ -12,6 +12,8 @@
 """This module exports the Coffeelint plugin class."""
 
 from SublimeLinter.lint import Linter, persist
+from json import load
+import os
 
 
 class Coffeelint(Linter):
@@ -31,14 +33,59 @@ class Coffeelint(Linter):
     )
     multiline = True
     comment_re = r'\s*#'
-    config_file = ('-f', 'coffeelint.json', '~')
+    tempfile_suffix = '.coffee'
 
     def cmd(self):
         """Return a tuple with the command line to execute."""
 
-        command = [self.executable_path, '--reporter', 'jslint', '--stdin']
+        command = [self.executable_path, '--reporter', 'jslint']
 
         if persist.get_syntax(self.view) == 'coffeescript_literate':
             command.append('--literate')
 
+        base_dir = os.path.dirname(self.view.file_name())
+        coffeelint_json = self.get_config_file(base_dir)
+        if coffeelint_json:
+            command += ('-f', coffeelint_json)
+
+        command.append('@')
         return command
+
+    def get_config_file(self, path):
+        path = os.path.normpath(path)
+        config = self._get_config_from_dir(path)
+        if config:
+            return config
+        else:
+            config = self._get_config_from_package_json(path)
+            if config:
+                return config
+            else:
+                new_path = os.path.abspath(os.path.join(path, '..'))
+                if new_path != path:
+                    return self.get_config_file(new_path)
+                else:
+                    return None
+
+    def _get_config_from_dir(self, path):
+        config = os.path.join(path, 'coffeelint.json')
+        if os.path.isfile(config):
+            return config
+        return None
+
+    def _get_config_from_package_json(self, path):
+        package_json = os.path.join(path, 'package.json')
+        if not os.path.isfile(package_json):
+            return None
+        try:
+            json = load(open(package_json))
+            if 'coffeelintConfig' in json and json['coffeelintConfig']:
+                coffeelintConfig = json['coffeelintConfig']
+                if not os.path.isabs(coffeelintConfig):
+                    coffeelintConfig = os.path.join(path, coffeelintConfig)
+                if os.path.isfile(coffeelintConfig):
+                    return coffeelintConfig
+                return None
+            return None
+        except:
+            return None
