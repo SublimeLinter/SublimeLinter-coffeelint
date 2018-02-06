@@ -11,7 +11,7 @@
 
 """This module exports the Coffeelint plugin class."""
 
-import SublimeLinter
+import SublimeLinter.lint
 from SublimeLinter.lint import Linter, persist, util
 
 
