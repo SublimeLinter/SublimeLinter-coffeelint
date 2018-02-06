@@ -1,0 +1,5 @@
+SublimeLinter-coffeelint 2.0.0
+-------------------------------
+
+The linter plugin is now based on the NodeJS base linter.
+This should enable it to use a project's local coffeelint binary.
