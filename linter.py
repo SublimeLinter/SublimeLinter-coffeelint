@@ -1,23 +1,7 @@
-#
-# coffeelint.py
-# Linter for SublimeLinter3, a code checking framework for Sublime Text 3
-#
-# Written by Aparajita Fishman
-# Copyright (c) 2015-2016 The SublimeLinterCommunity
-# Copyright (c) 2013-2014 Aparajita Fishman
-#
-# License: MIT
-#
-
-"""This module exports the Coffeelint plugin class."""
-
 from SublimeLinter.lint import NodeLinter, util
 
 
 class Coffeelint(NodeLinter):
-    """Provides an interface to coffeelint."""
-
-    syntax = ('coffeescript', 'coffeescript_literate')
     npm_name = 'coffeelint'
     regex = (
         r'^<issue line="(?P<line>\d+)"\s*\r?\n'
@@ -27,8 +11,8 @@ class Coffeelint(NodeLinter):
         r'(?P<message>[^"\n\r]+)["\n\r]'
     )
     multiline = True
-
     defaults = {
+        'selector': 'source.coffee',
         'working_dir': '${file_path}'
     }
 
