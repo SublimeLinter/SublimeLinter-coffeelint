@@ -2,7 +2,6 @@ from SublimeLinter.lint import NodeLinter, util
 
 
 class Coffeelint(NodeLinter):
-    npm_name = 'coffeelint'
     regex = (
         r'^<issue line="(?P<line>\d+)"\s*\r?\n'
         r'\s*lineEnd="\d+"\s*\r?\n'
