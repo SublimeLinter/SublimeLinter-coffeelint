@@ -2,6 +2,7 @@ from SublimeLinter.lint import NodeLinter, util
 
 
 class Coffeelint(NodeLinter):
+    column_unit = 'utf16'
     regex = (
         r'^<issue line="(?P<line>\d+)"\s*\r?\n'
         r'\s*lineEnd="\d+"\s*\r?\n'
